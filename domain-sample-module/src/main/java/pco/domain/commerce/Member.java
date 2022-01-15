@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @author ParkChano
@@ -28,6 +32,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Member extends BaseEntity{
 	
 	@Id
@@ -44,22 +49,14 @@ public class Member extends BaseEntity{
 	@OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
 	private List<Orders> orders = new ArrayList<>();
 
+
+	public void changeMemberName(String name){
+		this.memberName=new String(name);
+	}
+
 	
 	public void changeOrder(Orders order){
 		orders.add(order);
 		order.member=this;		
-	}
-
-
-	
-	/**
-	 * @return
-	 * 2021. 6. 28.
-	 * ParkChano
-	 * description : 
-	 */
-	@Override
-	public String toString() {
-		return "Member [memberId=" + memberId + ", memberName=" + memberName + "]";
 	}
 }

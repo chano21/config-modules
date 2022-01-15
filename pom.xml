@@ -24,6 +24,7 @@
 		<module>jpa-querydsl-module</module>
 		<module>domain-sample-module</module>
 		<module>test-junit-module</module>
+		<module>hibernate-module</module>
 	</modules>
 	
 	<build>
