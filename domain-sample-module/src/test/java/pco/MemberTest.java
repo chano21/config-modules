@@ -66,7 +66,7 @@ public class MemberTest {
 					.name("바꿀이름")
 					.phoneNumber("폰번호")
 					.build();
-			service.changeMemberNameAndPhoneNumber(updateCommand);
+			service.changeMemberNameAndPhoneNumber(updateCommand,member.getMemberId());
 			System.out.println("변경완료");
 			
 		//	System.out.println("뜨로우");

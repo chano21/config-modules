@@ -1,5 +1,7 @@
 package pco.domain.service;
 
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,10 @@ public class MemberService {
 	
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void changeMemberNameAndPhoneNumber(UpdateMemberInfo memberInfo) throws Exception{
+	public void changeMemberNameAndPhoneNumber(UpdateMemberInfo memberInfo,Long memberId) throws Exception{
 		Member member=	
-				em.find(Member.class, Long.valueOf(1));
+				Optional.ofNullable(em.find(Member.class, Long.valueOf(memberId)))
+				.orElseThrow(() -> new Exception());
 		member.changeMemberNameAndPhoneNumber(memberInfo);
-		throw new Exception();
 	}
 }
