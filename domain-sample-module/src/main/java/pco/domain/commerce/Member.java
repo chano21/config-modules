@@ -36,24 +36,24 @@ public class Member extends BaseEntity
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long memberId;
+	private Long memberId;
 	
 	@Column(nullable = false)
-	public String memberName;
+	private String memberName;
 	
 	
 
 	@Column(nullable = true)
-	public String memberEmail;
+	private String memberEmail;
 	
 //	@Builder.Default
 	@OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
 //	private List<Orders> orders = new ArrayList<>();
-	public List<Orders> orders;
+	private List<Orders> orders;
 
 	
 	@Column(nullable = false)
-	public String phoneNumber;
+	private String phoneNumber;
 
 
 

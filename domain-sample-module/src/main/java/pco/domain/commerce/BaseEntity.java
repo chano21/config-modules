@@ -30,12 +30,12 @@ import pco.domain.status.Status;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 	@CreatedDate
-	public LocalDateTime createdDate;
+	private LocalDateTime createdDate;
 	@LastModifiedDate
-	public LocalDateTime modifiedDate;
+	private LocalDateTime modifiedDate;
 	
 	@Column(name = "author")
-	public String author;
+	private String author;
 	@Column(name = "del")
-	public Status.Del del;
+	private Status.Del del;
 }
