@@ -35,19 +35,19 @@ public class OrderProduct extends BaseEntity {
 	private Long orderProductId;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
-	private List<Orders> orders;
+	private Orders orders;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
-	private List<Product> products;
+	private Product products;
 
 
 	
 	public void changeOrder(Orders order){
-		orders.add(order);
+		this.orders=order;
 	}
 		
 	public void changeProduct(Product product){
-		products.add(product);
+		this.products=product;
 	}
 	
 	
