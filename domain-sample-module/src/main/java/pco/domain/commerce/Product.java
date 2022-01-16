@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @author ParkChano
@@ -28,6 +29,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "product")
+@ToString
 public class Product extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,5 +42,8 @@ public class Product extends BaseEntity {
 	@JoinColumn(name="order_product")
 	protected OrderProduct orderProduct;
 
+	public void changeProductName(String name) {
+		productName=new String(name);
+	}
 
 }

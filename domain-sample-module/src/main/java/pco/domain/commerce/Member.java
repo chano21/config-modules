@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,8 +30,9 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Member extends BaseEntity{
+@ToString(exclude = "orders")
+public class Member //extends BaseEntity
+{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,16 +41,30 @@ public class Member extends BaseEntity{
 	@Column(nullable = false)
 	private String memberName;
 	
+	
+
+	@Column(nullable = true)
+	private String memberEmail;
+
+//	@Builder.Default
+	@OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
+//	private List<Orders> orders = new ArrayList<>();
+	private List<Orders> orders;
+
+	
 	@Column(nullable = false)
 	private String phoneNumber;
-	
-	@Builder.Default
-	@OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
-	private List<Orders> orders = new ArrayList<>();
+
 
 
 	public void changeMemberName(String name){
 		this.memberName=new String(name);
+	}
+
+
+	public void changeMemberNameAndPhoneNumber(String name,String phoneNumber){
+		this.memberName=name;
+		this.phoneNumber =phoneNumber;
 	}
 
 	
