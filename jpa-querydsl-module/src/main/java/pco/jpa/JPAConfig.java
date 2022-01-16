@@ -14,7 +14,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Configuration
 @EnableJpaRepositories
-@EntityScan("pco.domain.commerce")
+@EntityScan("pco.domain")
 @EnableJpaAuditing
 public class JPAConfig {
 	

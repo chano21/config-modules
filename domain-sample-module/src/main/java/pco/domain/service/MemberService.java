@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import pco.domain.Member;
 import pco.domain.command.UpdateMemberInfo;
-import pco.domain.commerce.Member;
 
 @Service
 @RequiredArgsConstructor

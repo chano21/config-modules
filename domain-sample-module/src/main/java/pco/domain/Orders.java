@@ -1,4 +1,4 @@
-package pco.domain.commerce;
+package pco.domain;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;

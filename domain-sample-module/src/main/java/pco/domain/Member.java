@@ -1,4 +1,4 @@
-package pco.domain.commerce;
+package pco.domain;
 
 import java.util.List;
 

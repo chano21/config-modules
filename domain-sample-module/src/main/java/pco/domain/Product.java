@@ -1,4 +1,4 @@
-package pco.domain.commerce;
+package pco.domain;
 
 
 
@@ -28,15 +28,19 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "member_update_history")
+@Table(name = "product")
 @ToString
-public class MemberUpdateHistory extends BaseEntity {
+public class Product extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long updatedId;
+	private Long productId;
 	
 	@Column(name = "product_name")
-	private String updateHistory;
+	private String productName;
 
-	
+
+	public void changeProductName(String name) {
+		productName=new String(name);
+	}
+
 }

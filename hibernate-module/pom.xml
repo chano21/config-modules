@@ -12,6 +12,7 @@
 	<name>hibernate-module</name>
 
 	<dependencies>
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
