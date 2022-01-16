@@ -31,29 +31,29 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "orders")
-public class Member //extends BaseEntity
+public class Member extends BaseEntity
 {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long memberId;
+	public Long memberId;
 	
 	@Column(nullable = false)
-	private String memberName;
+	public String memberName;
 	
 	
 
 	@Column(nullable = true)
-	private String memberEmail;
-
+	public String memberEmail;
+	
 //	@Builder.Default
 	@OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
 //	private List<Orders> orders = new ArrayList<>();
-	private List<Orders> orders;
+	public List<Orders> orders;
 
 	
 	@Column(nullable = false)
-	private String phoneNumber;
+	public String phoneNumber;
 
 
 

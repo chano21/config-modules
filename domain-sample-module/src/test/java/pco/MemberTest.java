@@ -71,22 +71,22 @@ public class MemberTest {
 			
 		}
 		
-		@Test
-		@DisplayName("dirty properties not member catch test")
-		@Order(4)
-		public void dirtyPropertiesNotMemberTest() {
-
-			
-			Product product =Product.builder()
-					.productName("상품")
-					.build();
-			
-			em.persist(product);
-			assertEquals(true, em.contains(product));
-			product.changeProductName("바꾼이름");
-			System.out.println("상품 변경완료");
-		}
-		
+//		@Test
+//		@DisplayName("dirty properties not member catch test")
+//		@Order(4)
+//		public void dirtyPropertiesNotMemberTest() {
+//
+//			
+//			Product product =Product.builder()
+//					.productName("상품")
+//					.build();
+//			
+//			em.persist(product);
+//			assertEquals(true, em.contains(product));
+//			product.changeProductName("바꾼이름");
+//			System.out.println("상품 변경완료");
+//		}
+//		
 	
 		
 }

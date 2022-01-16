@@ -47,30 +47,33 @@ public class UpdateListener implements  PostUpdateEventListener {
 			System.out.println("///////////////4");
 			Arrays.asList(event.getDirtyProperties()).forEach(System.out::println);
 			System.out.println("///////////////5");
-			Arrays.asList(event.getDirtyProperties()).forEach(System.out::println);
+	
 			System.out.println("///////////////6");
-			int modified[] =event.getPersister().findModified(event.getOldState(),event.getState(), event.getEntity(), event.getSession());
-			for(int i =0; i<modified.length; i++) {
-				System.out.println(modified[i]);
-			//	event.getPersister().
-				//System.out.println(event.getPersister().getPropertyNames()[i]);
-				//				event.
+			int dirtys[] =event.getPersister().findDirty(event.getOldState(),
+					event.getState(), event.getEntity(), event.getSession());
+			String fileds[] = event.getPersister().getPropertyNames();
+			
+			for(int i =0; i<dirtys.length; i++) {
+				System.out.println(fileds[dirtys[i]] +": "
+						+event.getPersister().getPropertyValue(event.getEntity() , dirtys[i]));
 			}
+
+			
 			//Arrays.asList(event.getDirtyProperties()).forEach(System.out::println);
 			System.out.println("///////////////7");
-			modified =event.getPersister().findModified(event.getOldState(),event.getState(), event, null);
-			Field[] fields = event.getEntity().getClass().getDeclaredFields();
-			Field[] superFields = event.getEntity().getClass().getSuperclass().getDeclaredFields();
-			List<Field> fieldList = new ArrayList( Arrays.asList(fields));
-			List<Field> superFieldList =  new ArrayList(Arrays.asList(event.getEntity().getClass().getSuperclass().getDeclaredFields()));
-			
-			fieldList.addAll(superFieldList);
+//			modified =event.getPersister().findModified(event.getOldState(),event.getState(), event, null);
+//			Field[] fields = event.getEntity().getClass().getDeclaredFields();
+//			Field[] superFields = event.getEntity().getClass().getSuperclass().getDeclaredFields();
+//			List<Field> fieldList = new ArrayList( Arrays.asList(fields));
+//			List<Field> superFieldList =  new ArrayList(Arrays.asList(event.getEntity().getClass().getSuperclass().getDeclaredFields()));
+//			
+//			fieldList.addAll(superFieldList);
 		//	Collections.addAll(fieldList, superFields);
-			for(int i =0; i<modified.length; i++) {
-				int nowModified=modified[i];
-				System.out.println(fieldList.get(nowModified));
+//			for(int i =0; i<modified.length; i++) {
+//				int nowModified=modified[i];
+//				System.out.println(fieldList.get(nowModified));
 //				System.out.println(modified[i]);
-			}
+//			}
 			System.out.println("///////////////8");
 //			for(int i =0; i<event.getPersister()..length; i++) {
 //				System.out.println(i);
