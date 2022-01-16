@@ -28,19 +28,15 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product")
+@Table(name = "member_update_history")
 @ToString
-public class Product extends BaseEntity {
+public class MemberUpdateHistory extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long productId;
+	private Long updatedId;
 	
 	@Column(name = "product_name")
-	private String productName;
+	private String updateHistory;
 
-
-	public void changeProductName(String name) {
-		productName=new String(name);
-	}
-
+	
 }

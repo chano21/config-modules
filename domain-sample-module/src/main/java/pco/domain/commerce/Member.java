@@ -1,6 +1,5 @@
 package pco.domain.commerce;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,25 +11,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import pco.domain.command.UpdateMemberInfo;
 
-/**
- * @author ParkChano
- *
- * 2021. 6. 28.
- */
 @Entity
 @Table(name = "member")
 @Builder
 @Getter
+@DynamicUpdate
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "orders")
 public class Member extends BaseEntity
 {
 	
@@ -45,31 +40,14 @@ public class Member extends BaseEntity
 
 	@Column(nullable = true)
 	private String memberEmail;
-	
-//	@Builder.Default
-	@OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
-//	private List<Orders> orders = new ArrayList<>();
-	private List<Orders> orders;
 
 	
 	@Column(nullable = false)
 	private String phoneNumber;
 
-
-
-	public void changeMemberName(String name){
-		this.memberName=new String(name);
+	public void changeMemberNameAndPhoneNumber(UpdateMemberInfo memberInfo){
+		this.memberName=memberInfo.getName();
+		this.phoneNumber =memberInfo.getPhoneNumber();
 	}
 
-
-	public void changeMemberNameAndPhoneNumber(String name,String phoneNumber){
-		this.memberName=name;
-		this.phoneNumber =phoneNumber;
-	}
-
-	
-	public void changeOrder(Orders order){
-		orders.add(order);
-		order.member=this;		
-	}
 }

@@ -1,15 +1,15 @@
 package pco.domain.commerce;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -34,24 +34,20 @@ public class OrderProduct extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long orderProductId;
 	
-	@Builder.Default
-	@OneToMany(mappedBy = "orderProduct",fetch = FetchType.LAZY)
-	private List<Orders> orders = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
+	private List<Orders> orders;
 
-	@Builder.Default
-	@OneToMany(mappedBy = "orderProduct",fetch = FetchType.LAZY)
-	private List<Product> products = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
+	private List<Product> products;
 
 
 	
 	public void changeOrder(Orders order){
 		orders.add(order);
-		order.orderProduct=this;		
 	}
 		
 	public void changeProduct(Product product){
 		products.add(product);
-		product.orderProduct=this;		
 	}
 	
 	

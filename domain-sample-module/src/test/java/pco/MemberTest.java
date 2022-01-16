@@ -16,14 +16,19 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import pco.domain.command.UpdateMemberInfo;
 import pco.domain.commerce.Member;
 import pco.domain.commerce.Product;
+import pco.domain.service.MemberService;
 import pco.hibernate.HibernateListenerConfig;
 import pco.hibernate.listner.UpdateListener;
 import pco.jpa.JPAConfig;
 
 @DataJpaTest
-@ComponentScan(basePackageClasses= {UpdateListener.class})
+@ComponentScan(basePackageClasses= {UpdateListener.class,MemberService.class})
 @ContextConfiguration(classes = {JPAConfig.class,HibernateListenerConfig.class})
 //@ContextConfiguration(classes = {JPAConfig.class})
 @TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
@@ -33,6 +38,8 @@ public class MemberTest {
 	@Autowired
 	private EntityManager em;
 
+	@Autowired
+	private MemberService service;
 		@Test
 		@DisplayName("create member and is persist")
 		@Order(1)
@@ -48,28 +55,34 @@ public class MemberTest {
 		@Test
 		@DisplayName("dirty properties catch test")
 		@Order(2)
-		public void dirtyPropertiesTest() {
+		public void dirtyPropertiesTest() throws Exception {
 
 			Member member=	em.find(Member.class, Long.valueOf(1));
 			
 			assertEquals(true, em.contains(member));
 
 			//member.changeMemberName("바꾼이름");
-			member.changeMemberNameAndPhoneNumber("바꾼이름", "폰번호");
+			UpdateMemberInfo updateCommand=UpdateMemberInfo.builder()
+					.name("바꿀이름")
+					.phoneNumber("폰번호")
+					.build();
+			service.changeMemberNameAndPhoneNumber(updateCommand);
 			System.out.println("변경완료");
-		}
-
-		@Test
-		@DisplayName("change data test")
-		@Order(3)
-		public void changeDataTest() {
-
-			Member member=	em.find(Member.class, Long.valueOf(1));
 			
-			assertEquals(true, em.contains(member));
-			assertEquals("바꾼이름", member.getMemberName());
+		//	System.out.println("뜨로우");
 			
 		}
+
+//		@Test
+//		@DisplayName("change data test")
+//		@Order(3)
+//		public void changeDataTest() throws Exception {
+//
+//			Member member=	em.find(Member.class, Long.valueOf(1));
+//			
+//			assertEquals(true, em.contains(member));
+//			assertEquals("바꾼이름", member.getMemberName());
+//		}
 		
 //		@Test
 //		@DisplayName("dirty properties not member catch test")
